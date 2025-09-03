@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movie Rating Website</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/sample.css'%}">
+	<script type="text/javascript" src="{% static 'js/sample.js' %}"></script>
+<style type="text/css">
+	body{
+		background-image: url("{% static 'images/cinema2.jpg' %}");
+		background-repeat:no-repeat;
+		background-size:cover;
+	}
+</style>
+</head>
+<body>
+	<h2 style="color:yellow;text-align:center;font-size:40px">Movie rating website</h2>
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'css/sample.css'%}">!-->
+	<form method="POST">
+		{% csrf_token %}
+		<input type="text" name="uname" placeholder="enter your movie name" ><br><br>
+		<input type="number" name="release date" placeholder="date of release"><br><br>
+	 <div class="text-center">
+            	<button class="btn btn-success">check</button>
+            </div>
+		
+
+		
+		<!--<button>check</button>!-->
+		<!--<input type="submit" name="submit" value="Register">!-->
+
+
+
+
+
+
+     </form>
+     <!--<img src="{% static 'images/logo2.jpg' %}">!-->
+</body>
+</html>

@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browse Movies</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'images/netflx.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.75);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            font-weight: 600;
+            color: #E50914;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .btn-primary {
+            background-color: #E50914;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #b00610;
+        }
+
+        .btn-danger {
+            background-color: #E50914;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #a4070f;
+        }
+
+        .table {
+            color: white;
+        }
+
+        .table thead {
+            background-color: #E50914;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .text-muted {
+            color: #bbb !important;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar_user.html' %}
+
+<div class="container mt-5">
+
+    <!-- Search Form -->
+    <form method="get" action="" class="mb-4 d-flex justify-content-center">
+        <input type="text" name="search" class="form-control w-50" placeholder="Search by movie name" value="{{ request.GET.search }}">
+        <button type="submit" class="btn btn-primary ms-2">Search</button>
+    </form>
+
+    <!-- Movie List -->
+    <div class="card p-4">
+        <h2 class="text-center mb-4">Available Movies</h2>
+        <table class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                    <th>Rating</th>
+                    <th>Trailer</th> <!-- ✅ Trailer column added -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ movie.moviename }}</td>
+                    <td>{{ movie.genre }}</td>
+                    <td>{{ movie.releasedate }}</td>
+                    <td>{{ movie.rating }}</td>
+                    <td>
+                        {% if movie.trailer_link %}
+                            <a href="{{ movie.trailer_link }}" target="_blank" class="btn btn-danger btn-sm">Watch Trailer</a>
+                        {% else %}
+                            <span class="text-muted">N/A</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No movies found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
